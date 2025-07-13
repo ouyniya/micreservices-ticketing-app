@@ -27,3 +27,6 @@ Thumbs.db
 # Skaffold
 skaffold.log
 skaffold-debug.log
+
+# ไม่ให้ cert หลุดไปใน repo
+infra/tls/

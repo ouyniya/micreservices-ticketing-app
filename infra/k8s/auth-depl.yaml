@@ -20,12 +20,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-v1
+  name: auth-srv
 spec:
   selector:
     app: auth
+  type: NodePort   # กำหนด Service เป็น NodePort
   ports:
     - name: auth
       protocol: TCP
       port: 3500
       targetPort: 3500
+      nodePort: 30050  # อันนี้ตั้งเอง หรือให้ Kubernetes เลือกอัตโนมัติในช่วง 30000-32767
