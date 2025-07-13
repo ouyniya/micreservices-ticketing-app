@@ -3,4 +3,9 @@ import express from "express";
 const app = express();
 app.use(express.json());
 
-app.listen(3500, () => console.log("listening on port 3500"));
+app.get('/api/users/currentuser', (req, res) => {
+    res.send('Hi there!!!!')
+})
+
+const PORT = 3500;
+app.listen(PORT, () => console.log(`listening on port ${PORT}`));
