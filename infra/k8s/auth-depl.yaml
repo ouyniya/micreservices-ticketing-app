@@ -14,7 +14,13 @@ spec:
     spec:
       containers:
         - name: auth
-          image: niyaouy/auth
+          image: asia.gcr.io/ticketing-dev-465811/auth
+          env: 
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
 
 ---
 apiVersion: v1
@@ -24,10 +30,8 @@ metadata:
 spec:
   selector:
     app: auth
-  type: NodePort   # กำหนด Service เป็น NodePort
   ports:
     - name: auth
       protocol: TCP
       port: 3500
       targetPort: 3500
-      nodePort: 30050  # อันนี้ตั้งเอง หรือให้ Kubernetes เลือกอัตโนมัติในช่วง 30000-32767
