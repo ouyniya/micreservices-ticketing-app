@@ -19,7 +19,7 @@ router.post("/api/users/signup", async (req, res) => {
 
   if (existingUser) {
     console.log("Email in use...");
-    return res.send({});
+    return res.status(400).send({});
   }
 
   const user = User.build({ email, password });

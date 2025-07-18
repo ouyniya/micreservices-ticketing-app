@@ -6,7 +6,7 @@ export const requireAuth = (
   next: NextFunction
 ) => {
   if (!req.currentUser) {
-    return res.status(401).send("Unauthorized");
+    return res.status(401).send({ currentUser: null });
   }
   next();
 };
