@@ -8,11 +8,11 @@ router.post("/api/users/signup", async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || typeof email !== "string") {
-    res.status(400).send("Provide a valid email");
+    return res.status(400).send("Provide a valid email");
   }
 
   if (!password || typeof password !== "string") {
-    res.status(400).send("Provide a valid password");
+    return res.status(400).send("Provide a valid password");
   }
 
   const existingUser = await User.findOne({ email });

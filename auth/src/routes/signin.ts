@@ -14,8 +14,6 @@ router.post("/api/users/signin", async (req, res) => {
     return res.status(400).json("No email or password for input data");
   }
 
-  console.log("validate...1");
-
   const existingUser = await User.findOne({ email });
 
   if (!existingUser) {
@@ -31,8 +29,6 @@ router.post("/api/users/signin", async (req, res) => {
     return res.status(400).json("Invalid credentials");
   }
 
-  console.log("validate...password");
-
   // generate JWT
   const userJWT = jwt.sign(
     {
@@ -41,8 +37,6 @@ router.post("/api/users/signin", async (req, res) => {
     },
     process.env.JWT_KEY!
   );
-
-//   console.log(process.env.JWT_KEY);
 
   // Store it on session object
   req.session = {
