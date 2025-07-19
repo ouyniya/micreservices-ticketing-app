@@ -18,3 +18,7 @@ build:
         manual: 
           - src: 'src/**/*.ts'
             dest: . 
+    - image: asia.gcr.io/ticketing-dev-465811/client
+      context: client
+      docker:
+        dockerfile: Dockerfile

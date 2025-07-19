@@ -19,6 +19,7 @@ pnpm-debug.log*
 .vscode/
 .idea/
 *.swp
+*.next
 
 # OS-specific
 .DS_Store

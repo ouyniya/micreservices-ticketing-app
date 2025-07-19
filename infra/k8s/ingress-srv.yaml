@@ -17,3 +17,10 @@ spec:
                 name: auth-srv
                 port: 
                   number: 3500
+          - path: /?(.*)
+            pathType: ImplementationSpecific  # ✅ ต้องใส่ pathType ใน v1
+            backend:
+              service:
+                name: client-srv
+                port: 
+                  number: 3000
