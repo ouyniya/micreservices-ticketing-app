@@ -19,7 +19,7 @@ router.post("/api/users/signup", async (req, res) => {
 
   if (existingUser) {
     console.log("Email in use...");
-    return res.status(400).send({});
+    return res.status(400).send("Email in use");
   }
 
   const user = User.build({ email, password });
@@ -41,7 +41,7 @@ router.post("/api/users/signup", async (req, res) => {
     jwt: userJWT,
   };
 
-  console.log("Creating a user...");
+  console.log("Created a user...");
 
   res.status(201).send(user);
 });

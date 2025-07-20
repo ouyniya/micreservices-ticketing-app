@@ -1,50 +1,72 @@
-import axios from "axios";
+// components/SignupForm.js
 import { useState } from "react";
+import Router from "next/router";
+import useRequest from "../../hooks/use-request";
 
-export default () => {
+const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    console.log(email, password);
+  const { doRequest, errors } = useRequest({
+    url: "/api/users/signup",
+    method: "post",
+    body: {
+      email,
+      password,
+    },
+    onSuccess: () => Router.push("/"), // go to landing page
+  });
 
-    await axios.post('/api/users/signup', {
-      email, password
-    })
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const response = await doRequest();
   };
 
   return (
     <div
-      className="card text-center"
-      style={{ width: "550px", top: "24px", margin: "auto" }}
+      className="card shadow-sm"
+      style={{ maxWidth: 500, margin: "40px auto" }}
     >
-      <div className="card-header">Sign Up</div>
+      <div className="card-header text-center fw-bold fs-4">
+        Create an Account
+      </div>
       <div className="card-body">
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <label className="form-label">Email Address</label>
+        {errors}
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Email address</label>
             <input
+              type="email"
+              className="form-control"
+              placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="form-control"
+              required
             />
           </div>
-          <div className="form-group mt-2">
+          <div className="mb-3">
             <label className="form-label">Password</label>
             <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
               type="password"
               className="form-control"
+              placeholder="Enter a strong password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
-          <button className="btn btn-primary mt-2">Sign up</button>
+          <button type="submit" className="btn btn-primary w-100">
+            Sign Up
+          </button>
         </form>
       </div>
-      <div className="card-footer text-body-secondary">
-        Made with 💙 by nysdev.com
+      <div className="card-footer text-muted text-center small">
+        &copy; {new Date().getFullYear()}{" "}
+        <a href="https://nysdev.com">nysdev.com</a>
       </div>
     </div>
   );
 };
+
+export default SignupForm;
