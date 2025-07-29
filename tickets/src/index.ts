@@ -8,7 +8,7 @@ const start = async () => {
   }
 
   if (!process.env.MONGO_URI) {
-    console.log("MONGO_URI must be define");
+    console.log("MONGO_URI must be defined");
     return;
   }
 
