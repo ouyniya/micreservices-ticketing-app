@@ -17,8 +17,15 @@ spec:
                 name: auth-srv
                 port: 
                   number: 3500
+          - path: /api/tickets/?(.*)
+            pathType: ImplementationSpecific   
+            backend:
+              service:
+                name: tickets-srv
+                port: 
+                  number: 3500
           - path: /?(.*)
-            pathType: ImplementationSpecific  # ✅ ต้องใส่ pathType ใน v1
+            pathType: ImplementationSpecific  
             backend:
               service:
                 name: client-srv
